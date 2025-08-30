@@ -1,7 +1,6 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
-
 # TODO: add necessary import
 from sklearn.ensemble import RandomForestClassifier
 
@@ -26,7 +25,6 @@ def train_model(X_train, y_train):
     model = RandomForestClassifier(random_state=42)
     model.fit(X_train, y_train)
     return model
-    pass
 
 
 def compute_model_metrics(y, preds):
@@ -68,8 +66,6 @@ def inference(model, X):
     """
     # TODO: implement the function
     return model.predict(X)
-    pass
-
 
 def save_model(model, path):
     """Serializes model to a file.
@@ -84,7 +80,6 @@ def save_model(model, path):
     # TODO: implement the function
     with open(path, "wb") as f:
         pickle.dump(model, f)
-    pass
 
 
 def load_model(path):
@@ -92,7 +87,6 @@ def load_model(path):
     # TODO: implement the function
     with open(path, "rb") as f:
         return pickle.load(f)
-    pass
 
 
 def performance_on_categorical_slice(
