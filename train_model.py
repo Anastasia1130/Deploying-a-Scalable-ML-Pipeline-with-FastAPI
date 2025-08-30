@@ -2,6 +2,7 @@ import os
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 
 from ml.data import process_data
 from ml.model import (
@@ -13,6 +14,7 @@ from ml.model import (
     train_model,
 )
 
+model = RandomForestClassifier()
 # TODO: load the cencus.csv data
 project_path = os.getcwd()
 data_path = os.path.join(project_path, "data", "census.csv")
