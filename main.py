@@ -3,10 +3,11 @@ import os
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
-
+from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 from ml.data import apply_label, process_data
 from ml.model import inference, load_model
-
+lb = LabelBinarizer()
+encoder = OneHotEncoder()
 
 # DO NOT MODIFY
 class Data(BaseModel):
@@ -67,7 +68,7 @@ async def post_inference(data: Data):
         "native-country",
     ]
     data_processed, _, _, _ = process_data(
-        data_df, categorical_features=cat_features, label=None, training=False
+        data_df, categorical_features=cat_features, training=False, encoder=encoder, lb=lb
     )
 
     _inference = inference(model, data_processed)  # your code here to predict the result using data_processed
