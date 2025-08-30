@@ -2,7 +2,9 @@ import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
 
-def process_data(X, categorical_features=[], label=None, training=True, encoder=None, lb=None):
+def process_data(
+    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
+):
     """Process the data used in the machine learning pipeline.
 
     Processes the data using one hot encoding for the categorical features and a
@@ -48,8 +50,10 @@ def process_data(X, categorical_features=[], label=None, training=True, encoder=
     else:
         y = np.array([])
 
-    X_categorical = X[categorical_features].values if categorical_features else np.array([])
-    X_continuous = X.drop(*[categorical_features], axis=1)
+    X_categorical = (
+        X[categorical_features].values if categorical_features else np.array([])
+    )
+    X_continuous = X.drop(categorical_features, axis=1)
 
     if training is True:
         encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")

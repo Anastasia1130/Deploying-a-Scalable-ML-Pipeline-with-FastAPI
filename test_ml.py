@@ -5,16 +5,17 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import fbeta_score, precision_score, recall_score
-from ml.data import process_data
 from ml.model import train_model, compute_model_metrics
 from sklearn.model_selection import train_test_split
+
 
 def data():
     project_path = os.getcwd()
     data_path = os.path.join(project_path, "data", "census.csv")
     df = pd.read_csv(data_path)
     return df
+
+
 # TODO: implement the first test. Change the function name and input as needed
 def test_train_model():
     """
@@ -32,13 +33,16 @@ def test_train_model():
 # TODO: implement the second test. Change the function name and input as needed
 def test_compute_model():
     """
-    Test if compute_model_metrics function returns precision, recall, and F1 score as floats
+    Test if compute_model_metrics function returns
+    precision, recall, and F1 score as floats
     """
     y_true = np.array([1, 0, 1, 1, 0])
     y_pred = np.array([1, 0, 1, 0, 0])
     pass
 
-    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+    precision, recall, fbeta = compute_model_metrics(
+        y_true, y_pred
+    )
 
     assert isinstance(precision, float)
     assert isinstance(recall, float)
@@ -55,6 +59,6 @@ def test_size():
     train, test = train_test_split(df, test_size=0.2, random_state=12)
 
     assert len(train) + len(test) == len(df)
-    
+
     test_ratio = len(test) / len(df)
     assert abs(test_ratio - 0.2) < 0.01

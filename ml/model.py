@@ -1,6 +1,7 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
+
 # TODO: add necessary import
 from sklearn.ensemble import RandomForestClassifier
 
@@ -67,6 +68,7 @@ def inference(model, X):
     # TODO: implement the function
     return model.predict(X)
 
+
 def save_model(model, path):
     """Serializes model to a file.
 
@@ -90,8 +92,7 @@ def load_model(path):
 
 
 def performance_on_categorical_slice(
-    data, column_name, slice_value, categorical_features,
-    label, encoder, lb, model
+    data, column_name, slice_value, categorical_features, label, encoder, lb, model
 ):
     """Computes the model metrics on a slice
     of the data specified by a column name and
