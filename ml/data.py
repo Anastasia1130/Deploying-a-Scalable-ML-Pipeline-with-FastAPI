@@ -48,16 +48,19 @@ def process_data(X, categorical_features=[], label=None, training=True, encoder=
     else:
         y = np.array([])
 
-    X_categorical = X[categorical_features].values
-    X_continuous = X.drop(categorical_features, axis=1)
+    X_categorical = X[categorical_features].values if categorical_features else np.array([])
+    X_continuous = X.drop(*[categorical_features], axis=1)
 
     if training is True:
         encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
         lb = LabelBinarizer()
-        X_categorical = encoder.fit_transform(X_categorical)
+
+        if X_categorical.size > 0:
+            X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
     else:
-        X_categorical = encoder.transform(X_categorical)
+        if X_categorical.size > 0:
+            X_categorical = encoder.transform(X_categorical)
         try:
             y = lb.transform(y.values).ravel()
         # Catch the case where y is None because we're doing inference.
