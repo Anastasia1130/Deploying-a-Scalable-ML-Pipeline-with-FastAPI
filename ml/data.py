@@ -50,10 +50,8 @@ def process_data(
     else:
         y = np.array([])
 
-    X_categorical = (
-        X[categorical_features].values if categorical_features else np.array([])
-    )
-    X_continuous = X.drop(categorical_features, axis=1)
+    X_categorical = X[categorical_features].values
+    X_continuous = X.drop(*[categorical_features], axis=1)
 
     if training is True:
         encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
